@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GYM Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="shortcut icon" href="in.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <!-- Login Section -->
+        <div id="login-section" class="active-section">
+            <div class="login-wrapper">
+                <div class="login-left">
+                    <div class="login-info">
+                        <h1>FITNESS FIRST</h1>
+                        <p class="tagline">Train hard, stay fit, live strong</p>
+                        <div class="features-list">
+                            <div class="feature-item">
+                                <i class="fas fa-dumbbell"></i>
+                                <span>Professional Training Programs</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-heart"></i>
+                                <span>Health Monitoring</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-calendar-check"></i>
+                                <span>Schedule Management</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="login-right">
+                    <div class="form-container">
+                        <div class="logo-container">
+                            <img src="in.ico" alt="Gym Logo" class="logo-image">
+                            <h2>GYM Management System</h2>
+                        </div>
+                        <div class="login-form">
+                            <h3>Welcome Back</h3>
+                            <form id="login-form">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <div class="input-with-icon">
+                                        <i class="fas fa-envelope"></i>
+                                        <input type="email" id="email" placeholder="Enter your email" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <div class="input-with-icon">
+                                        <i class="fas fa-lock"></i>
+                                        <input type="password" id="password" placeholder="Enter your password" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="user-type">Login As</label>
+                                    <div class="input-with-icon">
+                                        <i class="fas fa-user-circle"></i>
+                                        <select id="user-type">
+                                            <option value="admin">Admin</option>
+                                            <option value="member">Member</option>
+                                            <option value="user">User</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="additional-options">
+                                    <div class="remember-me">
+                                        <input type="checkbox" id="remember-me">
+                                        <label for="remember-me">Remember me</label>
+                                    </div>
+                                    <a href="#" class="forgot-password">Forgot Password?</a>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Sign In</button>
+                                <div class="or-divider">
+                                    <span>OR</span>
+                                </div>
+                                <button type="button" class="btn btn-google">
+                                    <i class="fab fa-google"></i> Sign in with Google
+                                </button>
+                            </form>
+                            <p id="login-error" class="error-message"></p>
+                            <div class="register-link">
+                                Don't have an account? <a href="#">Register now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard Section -->
+        <div id="admin-section" class="dashboard-section">
+            <header>
+                <div class="header-logo">
+                    <img src="in.ico" alt="Gym Logo" class="header-logo-image">
+                    <h2>Admin Dashboard</h2>
+                </div>
+                <button id="admin-logout" class="btn btn-logout">Logout</button>
+            </header>
+            <nav class="sidebar">
+                <ul>
+                    <li data-tab="members" class="active"><i class="fas fa-users"></i> Members</li>
+                    <li data-tab="billing"><i class="fas fa-file-invoice"></i> Billing</li>
+                    <li data-tab="reports"><i class="fas fa-chart-bar"></i> Reports</li>
+                    <li data-tab="supplements"><i class="fas fa-pills"></i> Supplements</li>
+                    <li data-tab="nutrition"><i class="fas fa-apple-alt"></i> Nutrition</li>
+                </ul>
+            </nav>
+            <main class="content">
+                <!-- Members Tab -->
+                <div id="members-tab" class="tab-content active">
+                    <div class="action-bar">
+                        <h3>Member Management</h3>
+                        <button id="add-member-btn" class="btn btn-success">Add New Member</button>
+                    </div>
+                    <div class="search-bar">
+                        <input type="text" id="member-search" placeholder="Search members...">
+                    </div>
+                    <div class="table-container">
+                        <table id="members-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Membership</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Member data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Member Form Modal -->
+                    <div id="member-modal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <h3 id="modal-title">Add New Member</h3>
+                            <form id="member-form">
+                                <div class="form-group">
+                                    <label for="member-name">Full Name</label>
+                                    <input type="text" id="member-name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="member-email">Email</label>
+                                    <input type="email" id="member-email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="member-phone">Phone</label>
+                                    <input type="tel" id="member-phone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="member-address">Address</label>
+                                    <textarea id="member-address"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="membership-type">Membership Type</label>
+                                    <select id="membership-type">
+                                        <option value="basic">Basic</option>
+                                        <option value="premium">Premium</option>
+                                        <option value="platinum">Platinum</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Billing Tab -->
+                <div id="billing-tab" class="tab-content">
+                    <h3>Billing Management</h3>
+                    <div class="billing-actions">
+                        <button id="generate-bill-btn" class="btn btn-primary">Generate Bill</button>
+                        <button id="send-notifications-btn" class="btn btn-info">Send Notifications</button>
+                    </div>
+                    <div class="table-container">
+                        <table id="billing-table">
+                            <thead>
+                                <tr>
+                                    <th>Bill ID</th>
+                                    <th>Member</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Billing data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Reports Tab -->
+                <div id="reports-tab" class="tab-content">
+                    <h3>Financial Reports</h3>
+                    <div class="dashboard-stats">
+                        <div class="stats-row">
+                            <div class="dashboard-card">
+                                <div class="dashboard-card-header">
+                                    <h4>Total Revenue</h4>
+                                    <div class="icon">
+                                        <i class="fas fa-rupee-sign"></i>
+                                    </div>
+                                </div>
+                                <div class="dashboard-card-content">
+                                    <div>
+                                        <div class="value">₹9,63,000</div>
+                                        <div class="label">Last 30 days</div>
+                                    </div>
+                                    <div class="trend up">
+                                        <i class="fas fa-arrow-up"></i> 8.5%
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dashboard-card">
+                                <div class="dashboard-card-header">
+                                    <h4>Active Members</h4>
+                                    <div class="icon">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                </div>
+                                <div class="dashboard-card-content">
+                                    <div>
+                                        <div class="value">248</div>
+                                        <div class="label">Total members</div>
+                                    </div>
+                                    <div class="trend up">
+                                        <i class="fas fa-arrow-up"></i> 12.3%
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dashboard-card">
+                                <div class="dashboard-card-header">
+                                    <h4>Pending Payments</h4>
+                                    <div class="icon">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <div class="dashboard-card-content">
+                                    <div>
+                                        <div class="value">18</div>
+                                        <div class="label">This month</div>
+                                    </div>
+                                    <div class="trend down">
+                                        <i class="fas fa-arrow-down"></i> 5.2%
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dashboard-card">
+                                <div class="dashboard-card-header">
+                                    <h4>New Registrations</h4>
+                                    <div class="icon">
+                                        <i class="fas fa-user-plus"></i>
+                                    </div>
+                                </div>
+                                <div class="dashboard-card-content">
+                                    <div>
+                                        <div class="value">32</div>
+                                        <div class="label">Last 30 days</div>
+                                    </div>
+                                    <div class="trend up">
+                                        <i class="fas fa-arrow-up"></i> 15.7%
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="report-charts">
+                        <div class="chart-container">
+                            <h4>Monthly Revenue</h4>
+                            <div id="revenue-chart" class="chart-area">
+                                <div class="chart-placeholder">
+                                    <div class="chart-bars">
+                                        <div class="chart-bar" style="height: 40%;"></div>
+                                        <div class="chart-bar" style="height: 65%;"></div>
+                                        <div class="chart-bar" style="height: 85%;"></div>
+                                        <div class="chart-bar" style="height: 55%;"></div>
+                                        <div class="chart-bar" style="height: 75%;"></div>
+                                        <div class="chart-bar" style="height: 90%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <h4>Membership Distribution</h4>
+                            <div id="membership-chart" class="chart-area">
+                                <div class="chart-placeholder">
+                                    <div class="donut-chart">
+                                        <div class="donut-segment" style="--offset: 0; --value: 65; --bg: #3498db;"></div>
+                                        <div class="donut-segment" style="--offset: 65; --value: 25; --bg: #2ecc71;"></div>
+                                        <div class="donut-segment" style="--offset: 90; --value: 10; --bg: #e74c3c;"></div>
+                                    </div>
+                                    <div class="chart-legend">
+                                        <div class="legend-item">
+                                            <span class="legend-color" style="background-color: #3498db;"></span>
+                                            <span>Basic (65%)</span>
+                                        </div>
+                                        <div class="legend-item">
+                                            <span class="legend-color" style="background-color: #2ecc71;"></span>
+                                            <span>Premium (25%)</span>
+                                        </div>
+                                        <div class="legend-item">
+                                            <span class="legend-color" style="background-color: #e74c3c;"></span>
+                                            <span>Platinum (10%)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="report-filters">
+                        <div class="form-group">
+                            <label for="report-type">Report Type</label>
+                            <select id="report-type">
+                                <option value="monthly">Monthly Revenue</option>
+                                <option value="membership">Membership Distribution</option>
+                                <option value="payment">Payment History</option>
+                            </select>
+                        </div>
+                        <button id="generate-report-btn" class="btn btn-primary">Generate Report</button>
+                        <button id="export-report-btn" class="btn btn-secondary">Export to PDF</button>
+                    </div>
+                    <div id="report-container" class="report-container">
+                        <!-- Report data will be displayed here -->
+                    </div>
+                </div>
+                
+                <div id="supplements-tab" class="tab-content">
+                    <h3>Supplement Store Management</h3>
+                    <div class="supplement-intro">
+                        <p>Manage the gym's supplement store inventory and track sales. Add new products or update existing ones.</p>
+                    </div>
+                    <div class="supplement-actions">
+                        <button class="btn btn-primary" id="add-product-btn">Add New Product</button>
+                        <button class="btn btn-secondary" id="sync-inventory-btn">Sync Inventory</button>
+                    </div>
+                    <div class="table-container">
+                        <table id="supplements-table">
+                            <thead>
+                                <tr>
+                                    <th>Product ID</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Price (₹)</th>
+                                    <th>Stock</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>PROD001</td>
+                                    <td>Whey Protein - 1kg</td>
+                                    <td>Protein</td>
+                                    <td>₹2,499</td>
+                                    <td>25</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Edit</button>
+                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>PROD002</td>
+                                    <td>BCAA - 500g</td>
+                                    <td>Amino Acids</td>
+                                    <td>₹1,299</td>
+                                    <td>18</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Edit</button>
+                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>PROD003</td>
+                                    <td>Pre-Workout - 300g</td>
+                                    <td>Performance</td>
+                                    <td>₹1,799</td>
+                                    <td>12</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Edit</button>
+                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div id="nutrition-tab" class="tab-content">
+                    <h3>Nutrition & Diet Management</h3>
+                    <!-- Nutrition content will go here -->
+                </div>
+            </main>
+        </div>
+
+        <!-- Member Dashboard Section -->
+        <div id="member-section" class="dashboard-section">
+            <header>
+                <div class="header-logo">
+                    <img src="in.ico" alt="Gym Logo" class="header-logo-image">
+                    <h2>Member Portal</h2>
+                </div>
+                <button id="member-logout" class="btn btn-logout">Logout</button>
+            </header>
+            <nav class="sidebar">
+                <ul>
+                    <li data-tab="profile" class="active"><i class="fas fa-user"></i> Profile</li>
+                    <li data-tab="payments"><i class="fas fa-credit-card"></i> Payments</li>
+                    <li data-tab="notifications"><i class="fas fa-bell"></i> Notifications</li>
+                    <li data-tab="workout"><i class="fas fa-dumbbell"></i> Workouts</li>
+                    <li data-tab="nutrition"><i class="fas fa-apple-alt"></i> Nutrition</li>
+                </ul>
+            </nav>
+            <main class="content">
+                <!-- Profile Tab -->
+                <div id="profile-tab" class="tab-content active">
+                    <h3>My Profile</h3>
+                    <div class="profile-info">
+                        <!-- Member profile information will be displayed here -->
+                    </div>
+                </div>
+                
+                <!-- Payments Tab -->
+                <div id="payments-tab" class="tab-content">
+                    <h3>Payment History</h3>
+                    <div class="table-container">
+                        <table id="payment-table">
+                            <thead>
+                                <tr>
+                                    <th>Receipt #</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Receipt</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Payment data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Notifications Tab -->
+                <div id="notifications-tab" class="tab-content">
+                    <h3>Notifications</h3>
+                    <div class="notifications-list">
+                        <!-- Notifications will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Workout Tab -->
+                <div id="workout-tab" class="tab-content">
+                    <h3>My Workout Plan</h3>
+                    <div class="workout-tabs">
+                        <button class="workout-day active" data-day="monday">Monday</button>
+                        <button class="workout-day" data-day="tuesday">Tuesday</button>
+                        <button class="workout-day" data-day="wednesday">Wednesday</button>
+                        <button class="workout-day" data-day="thursday">Thursday</button>
+                        <button class="workout-day" data-day="friday">Friday</button>
+                        <button class="workout-day" data-day="saturday">Saturday</button>
+                        <button class="workout-day" data-day="sunday">Sunday</button>
+                    </div>
+                    <div class="workout-content">
+                        <div id="monday-workout" class="day-plan active">
+                            <h4>Upper Body Strength & Yoga</h4>
+                            <div class="exercise-list">
+                                <div class="exercise-item">
+                                    <div class="exercise-header">
+                                        <div class="exercise-title">Surya Namaskar</div>
+                                        <div class="exercise-sets">10 cycles</div>
+                                    </div>
+                                    <div class="exercise-desc">
+                                        <p>Start your workout with 10 complete cycles of Surya Namaskar (Sun Salutation) to warm up the body and enhance flexibility.</p>
+                                    </div>
+                                </div>
+                                <div class="exercise-item">
+                                    <div class="exercise-header">
+                                        <div class="exercise-title">Chaturanga Pushups</div>
+                                        <div class="exercise-sets">3 sets x 12 reps</div>
+                                    </div>
+                                    <div class="exercise-desc">
+                                        <p>Yoga-style pushups that strengthen the chest, shoulders and triceps while engaging the core. Maintain proper alignment throughout the movement.</p>
+                                    </div>
+                                </div>
+                                <div class="exercise-item">
+                                    <div class="exercise-header">
+                                        <div class="exercise-title">Dand (Indian Pushups)</div>
+                                        <div class="exercise-sets">3 sets x 15 reps</div>
+                                    </div>
+                                    <div class="exercise-desc">
+                                        <p>Traditional Indian exercise that combines a pushup with a yoga-like movement. Begin in downward dog, swoop forward to a pushup, then back to the starting position.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Other day plans would be displayed similarly -->
+                    </div>
+                </div>
+                
+                <!-- Nutrition Tab -->
+                <div id="nutrition-tab" class="tab-content">
+                    <h3>Nutrition Plan</h3>
+                    <div class="nutrition-overview">
+                        <div class="nutrition-card">
+                            <div class="nutrition-header">
+                                <h4>Daily Calories</h4>
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <div class="nutrition-value">2,400</div>
+                            <div class="nutrition-progress">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 75%;"></div>
+                                </div>
+                                <div class="progress-label">1,800 / 2,400 consumed</div>
+                            </div>
+                        </div>
+                        <div class="nutrition-card">
+                            <div class="nutrition-header">
+                                <h4>Protein</h4>
+                                <i class="fas fa-drumstick-bite"></i>
+                            </div>
+                            <div class="nutrition-value">180g</div>
+                            <div class="nutrition-progress">
+                                <div class="progress-bar">
+                                    <div class="progress protein" style="width: 60%;"></div>
+                                </div>
+                                <div class="progress-label">108g / 180g consumed</div>
+                            </div>
+                        </div>
+                        <div class="nutrition-card">
+                            <div class="nutrition-header">
+                                <h4>Carbohydrates</h4>
+                                <i class="fas fa-bread-slice"></i>
+                            </div>
+                            <div class="nutrition-value">220g</div>
+                            <div class="nutrition-progress">
+                                <div class="progress-bar">
+                                    <div class="progress carbs" style="width: 80%;"></div>
+                                </div>
+                                <div class="progress-label">176g / 220g consumed</div>
+                            </div>
+                        </div>
+                        <div class="nutrition-card">
+                            <div class="nutrition-header">
+                                <h4>Fats</h4>
+                                <i class="fas fa-cheese"></i>
+                            </div>
+                            <div class="nutrition-value">65g</div>
+                            <div class="nutrition-progress">
+                                <div class="progress-bar">
+                                    <div class="progress fats" style="width: 70%;"></div>
+                                </div>
+                                <div class="progress-label">45g / 65g consumed</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="meal-plan">
+                        <h4>Today's Meal Plan</h4>
+                        <div class="meal-tabs">
+                            <button class="meal-tab active" data-meal="breakfast">Breakfast</button>
+                            <button class="meal-tab" data-meal="lunch">Lunch</button>
+                            <button class="meal-tab" data-meal="dinner">Dinner</button>
+                            <button class="meal-tab" data-meal="snacks">Snacks</button>
+                        </div>
+                        <div class="meal-content">
+                            <div id="breakfast-meal" class="meal-items active">
+                                <div class="meal-item">
+                                    <div class="meal-image">
+                                        <i class="fas fa-egg"></i>
+                                    </div>
+                                    <div class="meal-details">
+                                        <h5>Protein Oatmeal</h5>
+                                        <p>1 cup oatmeal, 1 scoop protein powder, 1 tbsp honey, berries</p>
+                                        <div class="meal-macros">
+                                            <span>420 cal</span>
+                                            <span>30g protein</span>
+                                            <span>55g carbs</span>
+                                            <span>8g fat</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="meal-item">
+                                    <div class="meal-image">
+                                        <i class="fas fa-blender"></i>
+                                    </div>
+                                    <div class="meal-details">
+                                        <h5>Green Smoothie</h5>
+                                        <p>Spinach, banana, almond milk, protein powder, chia seeds</p>
+                                        <div class="meal-macros">
+                                            <span>280 cal</span>
+                                            <span>20g protein</span>
+                                            <span>35g carbs</span>
+                                            <span>6g fat</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Other meal sections would be displayed similarly -->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- User Dashboard Section -->
+        <div id="user-section" class="dashboard-section">
+            <header>
+                <div class="header-logo">
+                    <img src="in.ico" alt="Gym Logo" class="header-logo-image">
+                    <h2>Staff Portal</h2>
+                </div>
+                <button id="user-logout" class="btn btn-logout">Logout</button>
+            </header>
+            <nav class="sidebar">
+                <ul>
+                    <li data-tab="member-search" class="active"><i class="fas fa-search"></i> Member Search</li>
+                    <li data-tab="member-details"><i class="fas fa-info-circle"></i> Member Details</li>
+                </ul>
+            </nav>
+            <main class="content">
+                <!-- Member Search Tab -->
+                <div id="member-search-tab" class="tab-content active">
+                    <h3>Search Members</h3>
+                    <div class="search-bar">
+                        <input type="text" id="user-member-search" placeholder="Search by name, email, or ID...">
+                        <button id="search-btn" class="btn btn-primary">Search</button>
+                    </div>
+                    <div class="table-container">
+                        <table id="user-members-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Membership</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Member data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Member Details Tab -->
+                <div id="member-details-tab" class="tab-content">
+                    <h3>Member Details</h3>
+                    <div id="member-details-container">
+                        <!-- Member details will be displayed here -->
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-logo">
+            <img src="in.ico" alt="Gym Logo" class="footer-logo-image">
+            <h4>FITNESS FIRST</h4>
+        </div>
+        <p>&copy; 2023 GYM Management System | All Rights Reserved</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact Us</a>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html> 
